@@ -1,0 +1,102 @@
+---
+title: "Rapport d'Analyse des Ventes"
+author: "Votre Nom"
+date: "today"
+format:
+  html:
+    embed-resources: true
+    toc: true
+    theme: cosmo
+---
+
+## Introduction
+
+Ce rapport présente une analyse simple des données de ventes. L'objectif est de démontrer un workflow reproductible où un rapport Quarto est généré à partir de données préparées.
+
+Ce rapport est généré à partir du fichier `reports/example_report.qmd`. Pour le rendre en HTML, exécutez la commande suivante dans votre terminal :
+```bash
+quarto render reports/example_report.qmd
+```
+
+```{python}
+#| echo: false
+#| message: false
+import polars as pl
+import plotly.express as px
+from io import StringIO
+
+# --- Simulation de données ---
+# Dans un vrai scénario, on lirait un fichier depuis `data/processed/`
+# ex: df = pl.read_parquet("data/processed/my_data.parquet")
+csv_data = """
+date,product,sales,region
+2024-01-01,A,150,North
+2024-01-01,B,220,South
+2024-01-02,A,160,North
+2024-01-02,B,240,South
+2024-01-03,A,180,North
+2024-01-03,C,300,North
+2024-01-04,B,280,South
+2024-01-04,C,320,North
+"""
+df = pl.read_csv(StringIO(csv_data))
+df = df.with_columns(pl.col("date").str.to_date(format="%Y-%m-%d"))
+```
+
+## Aperçu des Données
+
+Voici les premières lignes du jeu de données utilisé pour cette analyse.
+
+```{python}
+#| echo: true
+print(df.head())
+```
+
+## Analyse des Ventes
+
+### Ventes Totales par Produit
+
+Nous agrégeons les données pour visualiser les performances de chaque produit.
+
+```{python}
+#| echo: false
+#| message: false
+
+sales_by_product = df.group_by("product").agg(
+    pl.sum("sales").alias("total_sales")
+).sort("total_sales", descending=True)
+
+fig_bar = px.bar(
+    sales_by_product.to_pandas(),
+    x='product',
+    y='total_sales',
+    title='Ventes totales par produit',
+    labels={'product': 'Produit', 'total_sales': 'Ventes totales'}
+)
+fig_bar.show()
+```
+
+Le produit `B` est le plus performant en termes de ventes totales sur la période.
+
+### Évolution des Ventes Journalières
+
+Nous pouvons également observer l'évolution des ventes totales au fil du temps.
+
+```{python}
+#| echo: false
+#| message: false
+
+sales_by_day = df.group_by("date").agg(pl.sum("sales").alias("total_sales"))
+fig_line = px.line(
+    sales_by_day.to_pandas(),
+    x='date',
+    y='total_sales',
+    title='Évolution des ventes journalières',
+    labels={'date': 'Date', 'total_sales': 'Ventes totales'}
+)
+fig_line.show()
+```
+
+## Conclusion
+
+Ce rapport simple démontre la puissance de Quarto pour créer des documents dynamiques et reproductibles. En séparant le code de l'analyse du texte, nous pouvons facilement mettre à jour le rapport lorsque de nouvelles données sont disponibles, simplement en ré-exécutant le rendu.
