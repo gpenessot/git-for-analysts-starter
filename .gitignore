@@ -1,0 +1,57 @@
+# Python environments
+.venv/
+venv/
+env/
+.env
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Notebook checkpoints
+.ipynb_checkpoints/
+.marimo-cache/
+
+# IDE specific
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Data files
+# Raw data should be tracked with DVC, not Git
+data/raw/*.csv
+data/raw/*.xlsx
+data/raw/*.parquet
+data/raw/*.json
+# Processed data should also be tracked with DVC
+data/processed/*.csv
+data/processed/*.parquet
+
+# Credentials & secrets
+credentials.json
+*.key
+*.pem
+config.py
+config.ini
+
+# OS specific
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+*.bak
+
+# DVC cache
+.dvc/cache
+.dvc/tmp
+
+# Quarto
+_quarto/
+_freeze/
+*.html
+*.pdf

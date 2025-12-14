@@ -1,0 +1,27 @@
+[project]
+name = "git-for-analysts-starter"
+version = "0.1.0"
+description = "A starter template for data analysts to use Git, DVC, and modern tooling."
+authors = [{ name = "Gaël Penessot", email = "your-email@example.com" }]
+license = { text = "MIT" }
+readme = "README.md"
+requires-python = ">=3.9"
+dependencies = [
+    "polars>=0.20.0",
+    "pandas>=2.0.0",
+    "duckdb>=0.10.0",
+    "plotly>=5.0.0",
+    "matplotlib>=3.8.0",
+    "quarto>=1.0.0",
+    "jupyter>=1.0.0",
+    "marimo>=0.4.0",
+    "dvc[gdrive]>=3.0.0",
+    "python-dotenv>=1.0.0",
+]
+
+[project.urls]
+Homepage = "https://github.com/gpenessot/git-for-analysts-starter"
+Repository = "https://github.com/gpenessot/git-for-analysts-starter"
+
+[tool.uv]
+# You can add uv-specific configurations here if needed.

@@ -1,0 +1,6 @@
+# Indicate that large data files should be handled by DVC
+*.csv dvc=true
+*.xlsx dvc=true
+*.parquet dvc=true
+*.pkl dvc=true
+*.zip dvc=true

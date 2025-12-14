@@ -1,0 +1,19 @@
+# Data manipulation
+polars>=0.20.0
+pandas>=2.0.0
+duckdb>=0.10.0
+
+# Visualization
+plotly>=5.0.0
+matplotlib>=3.8.0
+
+# Reporting
+quarto>=1.0.0
+jupyter>=1.0.0
+marimo>=0.4.0
+
+# Data versioning
+dvc[gdrive]>=3.0.0
+
+# Environment management
+python-dotenv>=1.0.0
