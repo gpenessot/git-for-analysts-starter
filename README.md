@@ -32,10 +32,14 @@ Ce projet est le compagnon de la **[Newsletter DataGyver #10 : Git pour Analyste
 -   **Structure de Projet Claire** : Une organisation logique pour séparer les données, les notebooks, les scripts et les rapports.
 -   **.gitignore Pré-configuré** : Ignore les fichiers inutiles (environnements virtuels, caches, secrets, etc.) pour garder un historique propre.
 -   **Gestion des Données Volumineuses avec DVC** : Un setup de base pour versionner vos données (CSV, Parquet > 100Mo) avec DVC et Google Drive, sans alourdir votre repo Git.
+-   **Pre-commit Hooks** : Validation automatique du code (formatage, linting, détection de secrets) avant chaque commit.
+-   **GitHub Actions CI/CD** : Tests automatisés sur chaque push pour garantir la qualité du code.
+-   **Notebook Marimo** : Notebooks réactifs en fichiers `.py` purs, parfaits pour Git (diffs lisibles).
 -   **Exemples Concrets** : Des scripts, un notebook et un rapport Quarto pour illustrer les bonnes pratiques.
 -   **Documentation Actionnable** :
     -   [TUTORIAL.md](./TUTORIAL.md) : Un guide pas à pas pour débuter.
     -   `docs/` : Des aide-mémoires et des guides pour les workflows courants et la résolution de problèmes.
+    -   [CONTRIBUTING.md](./CONTRIBUTING.md) : Guide pour contribuer et participer au défi newsletter.
 
 ---
 
@@ -64,6 +68,47 @@ git-for-analysts-starter/
 -   **Git** : [Instructions d'installation](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git)
 -   **Python** : >= 3.9
 -   **uv** : Un gestionnaire de paquets et d'environnements Python rapide. `pip install uv`
+-   **Quarto** (optionnel) : Pour générer les rapports. [Instructions d'installation](https://quarto.org/docs/get-started/)
+
+---
+
+## 🛠️ Outils de Qualité de Code
+
+### Pre-commit Hooks
+
+Ce projet utilise **pre-commit** pour valider automatiquement votre code avant chaque commit.
+
+**Installation** :
+```bash
+# Après avoir installé les dépendances
+pre-commit install
+```
+
+**Ce qui est vérifié** :
+- ✅ Formatage Python (Ruff)
+- ✅ Linting (Ruff)
+- ✅ Détection de secrets (API keys, passwords)
+- ✅ Fichiers trop volumineux (>500KB)
+- ✅ Syntaxe YAML
+- ✅ Nettoyage des outputs Jupyter
+
+**Exécution manuelle** :
+```bash
+pre-commit run --all-files
+```
+
+### GitHub Actions
+
+Le projet inclut un workflow CI qui s'exécute automatiquement sur chaque push :
+
+- 🧪 Tests des scripts Python
+- 🔍 Linting et formatage (Ruff)
+- 🔒 Détection de secrets
+- 📓 Validation du notebook Marimo
+
+Consultez [`.github/workflows/ci.yml`](.github/workflows/ci.yml) pour plus de détails.
+
+---
 
 ## 🤝 Contribution
 

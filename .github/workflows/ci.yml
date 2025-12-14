@@ -1,0 +1,122 @@
+name: CI - Tests et Qualité du Code
+
+on:
+  push:
+    branches: [ main, develop ]
+  pull_request:
+    branches: [ main, develop ]
+
+jobs:
+  # Job 1: Linting et formatage avec Ruff
+  lint:
+    name: Linter et Formatter (Ruff)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Ruff
+        run: pip install ruff
+
+      - name: Run Ruff Linter
+        run: ruff check --output-format=github .
+
+      - name: Run Ruff Formatter
+        run: ruff format --check .
+
+  # Job 2: Vérification des secrets
+  security:
+    name: Détection de Secrets
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install detect-secrets
+        run: pip install detect-secrets
+
+      - name: Run detect-secrets
+        run: detect-secrets scan --baseline .secrets.baseline
+
+  # Job 3: Tests des scripts Python
+  test-scripts:
+    name: Test des Scripts Python
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install uv
+          uv venv
+          . .venv/bin/activate
+          uv pip install polars plotly
+
+      - name: Create test data
+        run: |
+          mkdir -p data/raw data/processed
+          cat > data/raw/test_data.csv << 'EOF'
+          date,product,sales,region
+          2024-12-01,Product_A,100,North
+          2024-12-02,Product_B,200,South
+          EOF
+
+      - name: Test load_data.py
+        run: |
+          . .venv/bin/activate
+          python scripts/load_data.py data/raw/test_data.csv data/processed/test_data.parquet
+
+      - name: Test analyze.py
+        run: |
+          . .venv/bin/activate
+          python scripts/analyze.py data/processed/test_data.parquet
+
+  # Job 4: Vérification du notebook Marimo
+  test-marimo:
+    name: Test Notebook Marimo
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install Marimo
+        run: pip install marimo
+
+      - name: Check Marimo notebook
+        run: python -m marimo check notebooks/01_exploration.py
+
+  # Job 5: Build status (résumé)
+  build-status:
+    name: ✅ Build Status
+    runs-on: ubuntu-latest
+    needs: [lint, security, test-scripts, test-marimo]
+    if: always()
+    steps:
+      - name: Check all jobs
+        run: |
+          if [ "${{ needs.lint.result }}" != "success" ] || \
+             [ "${{ needs.security.result }}" != "success" ] || \
+             [ "${{ needs.test-scripts.result }}" != "success" ] || \
+             [ "${{ needs.test-marimo.result }}" != "success" ]; then
+            echo "❌ Some checks failed"
+            exit 1
+          else
+            echo "✅ All checks passed!"
+          fi

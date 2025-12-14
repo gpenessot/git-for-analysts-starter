@@ -2,7 +2,7 @@
 name = "git-for-analysts-starter"
 version = "0.1.0"
 description = "A starter template for data analysts to use Git, DVC, and modern tooling."
-authors = [{ name = "Gaël Penessot", email = "your-email@example.com" }]
+authors = [{ name = "Gaël Penessot" }]
 license = { text = "MIT" }
 readme = "README.md"
 requires-python = ">=3.9"
@@ -12,11 +12,12 @@ dependencies = [
     "duckdb>=0.10.0",
     "plotly>=5.0.0",
     "matplotlib>=3.8.0",
-    "quarto>=1.0.0",
     "jupyter>=1.0.0",
-    "marimo>=0.4.0",
+    "marimo>=0.9.0",
     "dvc[gdrive]>=3.0.0",
     "python-dotenv>=1.0.0",
+    "pre-commit>=4.0.0",
+    "ruff>=0.8.0",
 ]
 
 [project.urls]
@@ -25,3 +26,49 @@ Repository = "https://github.com/gpenessot/git-for-analysts-starter"
 
 [tool.uv]
 # You can add uv-specific configurations here if needed.
+
+[tool.ruff]
+# Exclude common directories
+exclude = [
+    ".venv",
+    "venv",
+    "__pycache__",
+    ".git",
+    ".dvc",
+    "build",
+    "dist",
+]
+
+# Set line length to 88 (Black default)
+line-length = 88
+
+# Target Python 3.9+
+target-version = "py39"
+
+[tool.ruff.lint]
+# Enable specific rule sets
+select = [
+    "E",   # pycodestyle errors
+    "W",   # pycodestyle warnings
+    "F",   # Pyflakes
+    "I",   # isort
+    "N",   # pep8-naming
+    "UP",  # pyupgrade
+    "B",   # flake8-bugbear
+    "C4",  # flake8-comprehensions
+]
+
+# Ignore specific rules
+ignore = [
+    "E501",  # Line too long (handled by formatter)
+    "N807",  # Function name `__` is standard in Marimo notebooks
+    "N803",  # Argument names in Marimo are often capitalized imports
+    "B018",  # Useless expressions are used in Marimo to display outputs
+]
+
+[tool.ruff.format]
+# Use double quotes for strings
+quote-style = "double"
+
+# Indent with spaces
+indent-style = "space"

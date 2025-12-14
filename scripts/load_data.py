@@ -7,8 +7,8 @@ including argument parsing, logging, and type hinting.
 
 import argparse
 import logging
+
 import polars as pl
-from typing import NoReturn
 
 # Configure basic logging
 logging.basicConfig(
@@ -61,9 +61,7 @@ if __name__ == "__main__":
     # --- Argument Parsing ---
     # This allows you to run the script from the command line with custom file paths
     # Example: python scripts/load_data.py data/raw/input.csv data/processed/output.parquet
-    parser = argparse.ArgumentParser(
-        description="Load, process, and save data."
-    )
+    parser = argparse.ArgumentParser(description="Load, process, and save data.")
     parser.add_argument(
         "raw_path",
         type=str,

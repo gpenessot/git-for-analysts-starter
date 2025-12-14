@@ -1,0 +1,5 @@
+outs:
+- md5: db3e0e7297419d7fe66871900dd0452c
+  size: 1689
+  hash: md5
+  path: sales_december_2024.csv

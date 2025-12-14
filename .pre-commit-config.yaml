@@ -1,0 +1,53 @@
+# Pre-commit hooks pour analyser et formater le code automatiquement
+# Installation: pip install pre-commit && pre-commit install
+# Usage manuel: pre-commit run --all-files
+
+repos:
+  # Hooks généraux
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v5.0.0
+    hooks:
+      - id: trailing-whitespace
+        name: Supprime les espaces en fin de ligne
+      - id: end-of-file-fixer
+        name: Assure qu'il y a une ligne vide en fin de fichier
+      - id: check-yaml
+        name: Vérifie la syntaxe YAML
+      - id: check-added-large-files
+        name: Empêche l'ajout de gros fichiers (>500KB)
+        args: ['--maxkb=500']
+      - id: check-case-conflict
+        name: Vérifie les conflits de noms de fichiers
+      - id: check-merge-conflict
+        name: Vérifie les marqueurs de conflit de merge
+      - id: mixed-line-ending
+        name: Vérifie les fins de ligne mixtes
+
+  # Formatage Python avec Ruff (remplace Black + isort + flake8)
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: v0.8.4
+    hooks:
+      # Linter
+      - id: ruff
+        name: Linter Python (Ruff)
+        args: [--fix, --exit-non-zero-on-fix]
+      # Formatter
+      - id: ruff-format
+        name: Formatter Python (Ruff)
+
+  # Vérifie les secrets (API keys, passwords, etc.)
+  - repo: https://github.com/Yelp/detect-secrets
+    rev: v1.5.0
+    hooks:
+      - id: detect-secrets
+        name: Détecte les secrets dans le code
+        args: ['--baseline', '.secrets.baseline']
+        exclude: package.lock.json
+
+  # Notebook Jupyter/Marimo - nettoyage des outputs
+  - repo: https://github.com/kynan/nbstripout
+    rev: 0.8.2
+    hooks:
+      - id: nbstripout
+        name: Nettoie les outputs des notebooks Jupyter
+        files: \.ipynb$

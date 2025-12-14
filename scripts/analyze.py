@@ -7,6 +7,7 @@ and prints the results to the console.
 
 import argparse
 import logging
+
 import polars as pl
 
 # Configure basic logging
@@ -35,15 +36,20 @@ def analyze_data(processed_data_path: str) -> None:
         if "product" in df.columns and "sales" in df.columns:
             logging.info("Performing aggregation: total sales by product...")
 
-            analysis_result = df.group_by("product").agg(
-                pl.sum("sales").alias("total_sales"),
-                pl.count().alias("number_of_transactions")
-            ).sort("total_sales", descending=True)
+            analysis_result = (
+                df.group_by("product")
+                .agg(
+                    pl.sum("sales").alias("total_sales"),
+                    pl.len().alias("number_of_transactions"),
+                )
+                .sort("total_sales", descending=True)
+            )
 
             # --- Display Results ---
             print("\n--- Analysis Results ---")
             print("Total Sales per Product:")
-            print(analysis_result)
+            # Use utf-8 encoding to avoid Windows console encoding issues
+            print(analysis_result.write_csv(include_header=True).strip())
             print("------------------------\n")
 
             logging.info("Analysis complete.")

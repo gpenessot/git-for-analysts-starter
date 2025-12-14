@@ -1,0 +1,23 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(tree:*)",
+      "Bash(find:*)",
+      "Bash(wc:*)",
+      "Bash(cat:*)",
+      "Bash(python -c:*)",
+      "Bash(python:*)",
+      "Bash(pip install:*)",
+      "Bash(uv venv:*)",
+      "Bash(. .venv/Scripts/activate)",
+      "Bash(uv pip install:*)",
+      "Bash(quarto:*)",
+      "Bash(dvc add:*)",
+      "Bash(detect-secrets scan:*)",
+      "Bash(pre-commit install:*)",
+      "Bash(pre-commit run:*)",
+      "Bash(marimo check:*)",
+      "Bash(git add:*)"
+    ]
+  }
+}

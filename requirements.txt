@@ -8,12 +8,15 @@ plotly>=5.0.0
 matplotlib>=3.8.0
 
 # Reporting
-quarto>=1.0.0
 jupyter>=1.0.0
-marimo>=0.4.0
+marimo>=0.9.0
 
 # Data versioning
 dvc[gdrive]>=3.0.0
 
 # Environment management
 python-dotenv>=1.0.0
+
+# Development tools
+pre-commit>=4.0.0
+ruff>=0.8.0
