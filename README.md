@@ -117,7 +117,7 @@ Ce projet est un template destiné à être amélioré par la communauté. Si vo
 ## 🔗 Ressources Externes
 
 -   **Newsletter DataGyver** : [datagy.substack.com](https://datagy.substack.com/)
--   **Mon profil LinkedIn** : [linkedin.com/in/gaelpenessot](https://linkedin.com/in/gaelpenessot/)
+-   **Mon profil LinkedIn** : [linkedin.com/in/gaelpenessot](https://linkedin.com/in/gael-penessot/)
 
 ## 📜 Licence
 
