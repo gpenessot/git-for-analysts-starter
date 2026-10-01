@@ -6,7 +6,7 @@ Vous en avez marre de jongler avec des fichiers `analyse_ventes_v2_final_OK_CEO_
 
 C'est un point de départ complet pour les analystes de données qui souhaitent adopter des pratiques de développement professionnelles avec **Git** et **DVC** sans se sentir intimidés. L'objectif : vous rendre plus productif, collaboratif et serein.
 
-Ce projet est le compagnon de la **[Newsletter DataGyver #10 : Git pour Analystes](https://datagy.substack.com/)**.
+Ce projet est le compagnon de la **[Newsletter DataGyver #10 : Git pour Analystes](https://datagyver.substack.com/)**.
 
 ---
 
@@ -114,10 +114,14 @@ Consultez [`.github/workflows/ci.yml`](.github/workflows/ci.yml) pour plus de d�
 
 Ce projet est un template destiné à être amélioré par la communauté. Si vous avez des suggestions, ouvrez une "Issue" ou proposez une "Pull Request" !
 
+## 🎓 Aller plus loin
+
+Ce template pose la structure. Pour la pratique, **[Git Survie](https://www.mes-formations-data.fr/git-survie)** : les 20 % de Git qui couvrent 80 % du travail réel, en scénarios interactifs, sans installation. Gratuit.
+
 ## 🔗 Ressources Externes
 
--   **Newsletter DataGyver** : [datagy.substack.com](https://datagy.substack.com/)
--   **Mon profil LinkedIn** : [linkedin.com/in/gaelpenessot](https://linkedin.com/in/gael-penessot/)
+-   **Newsletter DataGyver** : [datagyver.substack.com](https://datagyver.substack.com/)
+-   **Mon profil LinkedIn** : [linkedin.com/in/gael-penessot](https://linkedin.com/in/gael-penessot/)
 
 ## 📜 Licence
 
