@@ -118,6 +118,11 @@ Ce projet est un template destiné à être amélioré par la communauté. Si vo
 
 Ce template pose la structure. Pour la pratique, **[Git Survie](https://www.mes-formations-data.fr/git-survie)** : les 20 % de Git qui couvrent 80 % du travail réel, en scénarios interactifs, sans installation. Gratuit.
 
+Une fois Git acquis, il reste la vraie marche : ouvrir une pull request sur du code qui
+compte et se faire relire. C'est ce que fait **[Hard Mode](https://www.mes-formations-data.fr/hard-mode)** —
+dix semaines, une PR par semaine, une revue écrite dans chacune. Pas un corrigé, une relecture
+de ton raisonnement.
+
 ## 🔗 Ressources Externes
 
 -   **Newsletter DataGyver** : [datagyver.substack.com](https://datagyver.substack.com/)
